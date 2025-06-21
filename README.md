@@ -1,6 +1,6 @@
 # Cursed To Jump
 
-**Cursed To Jump** is a simple one-button platformer where your character is always moving — and the only thing you can do is jump.
+**Cursed To Jump** is a simple one-button platformer where your character is always moving, and the only thing you can do is jump.
 
 Your goal: reach the other side of each level to eventually reach the treasure chest at the end of the game using careful timing, tricky jumps, and the occasional trampoline. The game includes 10 hand-made levels with increasing difficulty.
 
