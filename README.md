@@ -2,7 +2,7 @@
 
 ![Screenshot](https://github.com/user-attachments/assets/4d9b7e00-23b8-44e1-ae05-89885ed4e081)
 
-🎮 [Play on Itch.io](alkhemrt.itch.io/cursed-to-jump)
+🎮 [Play on Itch.io]([alkhemrt.itch.io/cursed-to-jump](https://alkhemrt.itch.io/cursed-to-jump))
 
 **Cursed To Jump** is a simple one-button platformer where your character is always moving, and the only thing you can do is jump.
 
