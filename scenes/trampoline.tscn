@@ -1,0 +1,97 @@
+[gd_scene load_steps=14 format=3 uid="uid://blwmyc114tjr1"]
+
+[ext_resource type="Texture2D" uid="uid://ckhcbcruqqt2u" path="res://assets/monochrome_tilemap_transparent_packed.png" id="1_2yctu"]
+[ext_resource type="Script" uid="uid://bh3vceuap58w1" path="res://scripts/trampoline.gd" id="1_nytqh"]
+[ext_resource type="AudioStream" uid="uid://b5dr2jki72fbw" path="res://assets/audio/bounce.wav" id="3_1ne3y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nytqh"]
+atlas = ExtResource("1_2yctu")
+region = Rect2(48, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ne3y"]
+atlas = ExtResource("1_2yctu")
+region = Rect2(64, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gay0"]
+atlas = ExtResource("1_2yctu")
+region = Rect2(80, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_64cc3"]
+atlas = ExtResource("1_2yctu")
+region = Rect2(48, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yctu"]
+atlas = ExtResource("1_2yctu")
+region = Rect2(80, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqe70"]
+atlas = ExtResource("1_2yctu")
+region = Rect2(64, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_62mwn"]
+atlas = ExtResource("1_2yctu")
+region = Rect2(48, 128, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oqe70"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nytqh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ne3y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5gay0")
+}],
+"loop": false,
+"name": &"boing",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_64cc3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2yctu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oqe70")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_62mwn")
+}],
+"loop": false,
+"name": &"return",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_so26s"]
+size = Vector2(16, 8)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5gay0"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("3_1ne3y")
+
+[node name="Trampoline" type="Area2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_nytqh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_oqe70")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_so26s")
+
+[node name="Bounce" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_5gay0")
+volume_db = -10.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

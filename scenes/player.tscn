@@ -1,0 +1,117 @@
+[gd_scene load_steps=17 format=3 uid="uid://kv1bahqh175g"]
+
+[ext_resource type="Script" uid="uid://8mxqxhtonctv" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="Texture2D" uid="uid://bw4nfry4k5vwb" path="res://assets/monochrome_tilemap_transparent.png" id="2_3mip4"]
+[ext_resource type="Texture2D" uid="uid://ckhcbcruqqt2u" path="res://assets/monochrome_tilemap_transparent_packed.png" id="3_qhqgy"]
+[ext_resource type="AudioStream" uid="uid://2aqw1mtitikl" path="res://assets/audio/walk.wav" id="4_dqkch"]
+[ext_resource type="AudioStream" uid="uid://c52jei1ht20p8" path="res://assets/audio/jump.wav" id="5_qlg0r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_insbl"]
+atlas = ExtResource("2_3mip4")
+region = Rect2(68, 204, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
+atlas = ExtResource("3_qhqgy")
+region = Rect2(80, 192, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rug40"]
+atlas = ExtResource("2_3mip4")
+region = Rect2(17, 204, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxi64"]
+atlas = ExtResource("2_3mip4")
+region = Rect2(34, 204, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nsdob"]
+atlas = ExtResource("2_3mip4")
+region = Rect2(51, 204, 17, 17)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tuyoq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_insbl")
+}],
+"loop": true,
+"name": &"airborne",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqkch")
+}],
+"loop": true,
+"name": &"holding",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rug40")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxi64")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nsdob")
+}],
+"loop": true,
+"name": &"run",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vyb7"]
+size = Vector2(11, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
+atlas = ExtResource("3_qhqgy")
+region = Rect2(32, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fjrip"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlg0r")
+}],
+"loop": true,
+"name": &"diamond",
+"speed": 5.0
+}]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qhqgy"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("4_dqkch")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qlg0r"]
+random_volume_offset_db = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("5_qlg0r")
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_g2els")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -3)
+sprite_frames = SubResource("SpriteFrames_tuyoq")
+animation = &"holding"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_3vyb7")
+
+[node name="ItemsHolding" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, -17)
+sprite_frames = SubResource("SpriteFrames_fjrip")
+animation = &"diamond"
+autoplay = "diamond"
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="Walk" type="AudioStreamPlayer" parent="Audio"]
+stream = SubResource("AudioStreamRandomizer_qhqgy")
+volume_db = -35.0
+
+[node name="Jump" type="AudioStreamPlayer" parent="Audio"]
+stream = SubResource("AudioStreamRandomizer_qlg0r")
+volume_db = -30.0

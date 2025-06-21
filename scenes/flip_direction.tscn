@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://d07d50vdbmtki"]
+
+[ext_resource type="Script" uid="uid://8n14agewjdus" path="res://scripts/flip_direction.gd" id="1_7quhu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2d22c"]
+size = Vector2(56, 0.5)
+
+[node name="FlipDirection" type="Area2D"]
+script = ExtResource("1_7quhu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.25)
+shape = SubResource("RectangleShape2D_2d22c")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
