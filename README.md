@@ -1,4 +1,7 @@
-# Cursed To Jump
+# Cursed To Jump!
+
+[pi2](https://github.com/user-attachments/assets/3ed5972d-42e8-46b8-89bf-b4bbc372b091)
+
 
 **Cursed To Jump** is a simple one-button platformer where your character is always moving, and the only thing you can do is jump.
 
